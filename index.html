@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #111;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+            max-width: 90%;
+            width: 400px;
+        }
+        input[type="text"] {
+            background: #222;
+            border: none;
+            border-bottom: 2px solid #444;
+            color: #fff;
+            font-size: 18px;
+            padding: 12px;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        input[type="text"]:focus {
+            border-bottom: 2px solid #fff;
+            outline: none;
+        }
+        button {
+            background: #444;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #666;
+        }
+    </style>
+</head>
+<body>
+    <form action="https://formspree.io/f/xbllbrgp" method="POST" onsubmit="return validateForm()">
+        <input type="text" name="solution" id="solution" placeholder="*******" required>
+        <button type="submit"></button>
+    </form>
+    <script>
+        const validCodes = [
+            "242805", "954280", "023634", "649018",
+            "129173", "441299", "732335", "536117",
+            "048847", "136756", "968304", "469159"
+        ];
+
+        function validateForm() {
+            const input = document.getElementById('solution').value.trim();
+            const urlCode = window.location.pathname.split('/').pop();
+            if (!validCodes.includes(urlCode)) {
+                alert('Nieprawidłowy kod strony.');
+                return false;
+            }
+            document.getElementById('solution').value = `${urlCode} ${input}`;
+            return true;
+        }
+    </script>
+</body>
+</html>
